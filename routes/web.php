@@ -11,6 +11,18 @@
 |
 */
 
+Use Illuminate\Support\Facades\Gate;
+
 Route::get('/', function () {
-    return view('welcome');
+
+    If(Gate::allows('access-admin')){
+        return "Usuário com permissão de admin";
+    }else{
+        return "Usuário sem permissão de admin";
+    }
+    //return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
